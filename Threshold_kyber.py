@@ -59,8 +59,8 @@ def find_flooding_sigma(ps, max_failure=2**(-64), sigma_start=230, sigma_step=5,
         else:
             print('\tTrying sigma: %s, log failure: %.2f, shift ~ %.2f' % (sigma, log(failure_prob, 2), approx_shift))
 
-    pr_ct_max = max(v for v in ct_error if ct_error[v] > max_failure)
-    pr_flood_max = max(v for v in final_error_distribution if final_error_distribution[v] > max_failure)
+    pr_ct_max = max(abs(v) for v in ct_error if ct_error[v] > max_failure)
+    pr_flood_max = max(abs(v) for v in final_error_distribution if final_error_distribution[v] > max_failure)
     print('\t[worst ct max: %s, max w/ pr. 2^{%.2f}: %s]' % (max(ct_error), log(ct_error[pr_ct_max],2), pr_ct_max))
     print('\t[flood max: 2^{%.2f}: %s, q/4: %s]' % (log(final_error_distribution[pr_flood_max],2), pr_flood_max, q/4))
     
